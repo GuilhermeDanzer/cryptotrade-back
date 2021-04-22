@@ -1,0 +1,43 @@
+{
+  "name": "trademarket-back",
+  "version": "1.0.0",
+  "description": "Backend trademarket",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node ./src/index.js",
+    "swagger-autogen": "node ./src/swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exodo-coin/trademarket-backend.git"
+  },
+  "author": "GDanzer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/exodo-coin/trademarket-backend/issues"
+  },
+  "homepage": "https://github.com/exodo-coin/trademarket-backend#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.18",
+    "node-cron": "^2.0.3",
+    "node-schedule": "^2.0.0",
+    "nodemon": "^2.0.6",
+    "qrcode": "^1.4.4",
+    "referral-mongo": "^2.3.9",
+    "request": "^2.88.2",
+    "speakeasy": "^2.0.0",
+    "swagger-autogen": "^2.7.9",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {}
+}

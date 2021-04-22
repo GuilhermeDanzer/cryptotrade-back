@@ -1,0 +1,702 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Cryptocoin Exodo",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "https://criptocoin.rj.r.appspot.com",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Efetua o login verificando se os campos estão validos",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Solicitação Inválida"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Efetua o registro, retorna o qrcode,secret32 e o usuario cadastrado",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "referenciadoPor": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "422": {}
+        }
+      }
+    },
+    "/verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Efetua a verificação do token 2FA do cadastro",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token2FA": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/validate": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Efetua a validação do token 2FA do login",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token2FA": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/coin": {
+      "post": {
+        "tags": [
+          "Moeda"
+        ],
+        "description": "Cadastro de uma moeda e retorna ela",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "sigla": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "quantidade": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rendimento": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      },
+      "get": {
+        "tags": [
+          "Moeda"
+        ],
+        "description": "Retorna todas as moedas",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/coin/{nome}": {
+      "get": {
+        "tags": [
+          "Moeda"
+        ],
+        "description": "Retorna uma moeda",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/coin/{sigla}": {
+      "delete": {
+        "tags": [
+          "Moeda"
+        ],
+        "description": "Deleta uma moeda",
+        "parameters": [
+          {
+            "name": "sigla",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/coin/rendimento": {
+      "post": {
+        "tags": [
+          "Moeda"
+        ],
+        "description": "Altera o rendimento de uma moeda",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/userPurchase/{id}": {
+      "get": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Retorna as operações feita por um usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/getPurchase": {
+      "get": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Retorna as operações feita pelo usuario",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/getPurchase/{operacao}": {
+      "get": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Retorna as operações feita por um usuario. Comprar, vender ou geral",
+        "parameters": [
+          {
+            "name": "operacao",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/purchase/all": {
+      "get": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Retorna todas as operações",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/purchase": {
+      "post": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Registra uma operação. comprar ou vender",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "operacao": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "moeda": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "quantidade": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/payment/comprar": {
+      "post": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Confirma uma compra",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "usuarioEmissor": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/payment/vender": {
+      "post": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Confirma uma venda",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "usuarioReceptor": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/payment/recusar": {
+      "post": {
+        "tags": [
+          "Compras"
+        ],
+        "description": "Rejeita uma compra ou venda",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/sacar/all": {
+      "get": {
+        "tags": [
+          "Saque"
+        ],
+        "description": "Retorna todos os saques",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "taxa": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/sacar": {
+      "get": {
+        "tags": [
+          "Saque"
+        ],
+        "description": "Retorna os saques do usuario",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      },
+      "post": {
+        "tags": [
+          "Saque"
+        ],
+        "description": "Efetua o saque",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "moedaNome": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "valorSaque": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/sacar/{id}": {
+      "get": {
+        "tags": [
+          "Saque"
+        ],
+        "description": "Retorna o saque pelo Id do saque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "422": {}
+        }
+      }
+    },
+    "/users/all": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retorna todos os usuarios",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retorna todos os usuarios, somente admin",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retorna os dados do usuario atual",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/taxaSaque": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Define a taxa do saque",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "taxa": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/deleteUser/{id}": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Deleta um usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/referenciados/{hash}": {
+      "get": {
+        "tags": [
+          "Referenciados"
+        ],
+        "description": "Retorna os referenciados de um usuario pela hash",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "422": {}
+        }
+      }
+    }
+  },
+  "definitions": {}
+}
